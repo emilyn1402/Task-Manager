@@ -80,10 +80,7 @@ function App() {
 
   return (
     <>
-      <div
-        className="d-flex align-items-center justify-content-center"
-        style={{ marginTop: "50px" }}
-      >
+      <div className="d-flex align-items-center justify-content-center">
         <div className="container" style={{ textAlign: "center" }}>
           <h1>Task List</h1>
           <TaskInput onAddTask={addTask} />

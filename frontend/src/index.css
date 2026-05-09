@@ -60,10 +60,21 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  background: transparent;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
   margin: 0;
+  background: var(--bg);
+}
+
+.bg-page-gradient {
+  background: transparent;
 }
 
 h1,
