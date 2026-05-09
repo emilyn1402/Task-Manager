@@ -31,3 +31,4 @@ C:\Users\Emz\source\reactapirepos\Task-Manager\backend\obj\Debug\net9.0\backend.
 C:\Users\Emz\source\reactapirepos\Task-Manager\backend\obj\Debug\net9.0\backend.genruntimeconfig.cache
 C:\Users\Emz\source\reactapirepos\Task-Manager\backend\obj\Debug\net9.0\ref\backend.dll
 C:\Users\Emz\source\reactapirepos\Task-Manager\backend\obj\Debug\net9.0\swae.build.ex.cache
+C:\Users\Emz\source\reactapirepos\Task-Manager\backend\obj\Debug\net9.0\backend.sourcelink.json
