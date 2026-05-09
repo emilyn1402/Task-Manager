@@ -30,6 +30,14 @@ const TaskList: React.FC<TaskListProps> = ({
   return (
     <>
       <ul className="list-group mb-3 ">
+        {tasks.length === 0 && (
+          <>
+            <li className="list-group-item d-flex align-items-center bg-transparent text-light">
+              <p>No task found!</p>
+            </li>
+          </>
+        )}
+
         {tasks.map((task) => (
           <li
             className="list-group-item d-flex align-items-center bg-transparent text-light"
