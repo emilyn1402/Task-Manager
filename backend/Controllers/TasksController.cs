@@ -40,4 +40,19 @@ public class TasksController : ControllerBase
         tasks.Remove(task);
         return NoContent();
     }
+
+    // PUT: api/tasks/{id}
+    [HttpPut("{id}")]
+    public IActionResult UpdateTask(int id, TaskList updatedTask)
+    {
+        var task = tasks.FirstOrDefault(t => t.Id == id);
+        if (task == null)
+        {
+            return NotFound();
+        }
+
+        task.Title = updatedTask.Title;
+        task.Completed = updatedTask.Completed;
+        return NoContent();
+    }
 }

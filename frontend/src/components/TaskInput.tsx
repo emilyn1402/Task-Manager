@@ -1,16 +1,19 @@
 import { useState } from "react";
 
 interface TaskInputProps {
+  // Function passed from parent to add a new task
   onAddTask: (task: string) => void;
 }
 
 function TaskInput({ onAddTask }: TaskInputProps) {
+  // State to hold the current value of the input field
   const [newTask, setNewTask] = useState("");
 
   const handleAddTask = () => {
     if (newTask.trim() !== "") {
-      onAddTask(newTask);
-      setNewTask("");
+      //Prevent adding empty tasks
+      onAddTask(newTask); // Call the parent function to add the task
+      setNewTask(""); // Clear the input field after adding the task
     }
   };
 
