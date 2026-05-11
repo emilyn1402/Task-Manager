@@ -11,8 +11,10 @@ using Backend.Data;
 [Route("api/[controller]")]
 public class TasksController : ControllerBase
 {
+    // Dependency injection of the database context
     private readonly AppDbContext _context;
 
+    // Constructor to initialize the database context
     public TasksController(AppDbContext context)
     {
         _context = context;
@@ -23,6 +25,7 @@ public class TasksController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TaskList>>> GetTasks()
     {
+        // Fetch all tasks from the database and return them as a list
         return Ok(await _context.Tasks.ToListAsync());
     }
 

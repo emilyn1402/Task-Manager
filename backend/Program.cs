@@ -7,8 +7,24 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // ✅ Add SQL Server + EF Core
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+// Read environment variable
+var environment = builder.Environment.EnvironmentName;
+
+// Connection strings
+var sqlServerConnection = builder.Configuration.GetConnectionString("SqlServerConnection");
+var sqliteConnection = builder.Configuration.GetConnectionString("SqliteConnection");
+
+// Choose provider based on environment
+if (environment == "Development" && Environment.GetEnvironmentVariable("CODESPACES") == "true")
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlite(sqliteConnection));
+}
+else
+{
+    builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseSqlServer(sqlServerConnection));
+}
 
 // ✅ Add services
 builder.Services.AddControllers();

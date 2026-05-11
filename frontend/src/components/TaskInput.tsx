@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// Component for inputting new tasks and adding them to the list via a callback function
 interface TaskInputProps {
   onAddTask: (task: string) => void;
 }
