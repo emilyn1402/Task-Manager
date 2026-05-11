@@ -2,50 +2,62 @@ using Microsoft.AspNetCore.Mvc;
 using Backend.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Backend.Data;
+
 
 [ApiController]
 [Route("api/[controller]")]
 public class TasksController : ControllerBase
 {
-    // In-memory list to store tasks (temporary storage)
-    private static List<TaskList> tasks = new List<TaskList>();
-    private static int nextId = 1;
+    private readonly AppDbContext _context;
+
+    public TasksController(AppDbContext context)
+    {
+        _context = context;
+    }
 
     // GET: api/tasks
+    // Asynchronously fetch all tasks from the database
     [HttpGet]
-    public ActionResult<IEnumerable<Task>> GetTasks()
+    public async Task<ActionResult<IEnumerable<TaskList>>> GetTasks()
     {
-        return Ok(tasks);
+        return Ok(await _context.Tasks.ToListAsync());
     }
 
     // POST: api/tasks
+    // Asynchronously add a new task to the database
     [HttpPost]
-    public ActionResult<Task> AddTask(TaskList newtask)
+    public async Task<ActionResult<TaskList>> AddTask(TaskList newtask)
     {
-        newtask.Id = nextId++;
-        tasks.Add(newtask);
+        _context.Tasks.Add(newtask);
+        await _context.SaveChangesAsync();
         return Ok(newtask);
     }
 
     // DELETE: api/tasks/{id}
+    // Asynchronously delete a task by ID
     [HttpDelete("{id}")]
-    public IActionResult DeleteTask(int id)
+    public async Task<IActionResult> DeleteTask(int id)
     {
-        var task = tasks.FirstOrDefault(t => t.Id == id);
+        var task = await _context.Tasks.FindAsync(id);
         if (task == null)
         {
             return NotFound();
         }
 
-        tasks.Remove(task);
+        _context.Tasks.Remove(task);
+        await _context.SaveChangesAsync();
         return NoContent();
     }
 
     // PUT: api/tasks/{id}
+    // Asynchronously update a task by ID
     [HttpPut("{id}")]
-    public IActionResult UpdateTask(int id, TaskList updatedTask)
+    public async Task<IActionResult> UpdateTask(int id, TaskList updatedTask)
     {
-        var task = tasks.FirstOrDefault(t => t.Id == id);
+        var task = await _context.Tasks.FindAsync(id);
         if (task == null)
         {
             return NotFound();
@@ -53,6 +65,7 @@ public class TasksController : ControllerBase
 
         task.Title = updatedTask.Title;
         task.Completed = updatedTask.Completed;
+        await _context.SaveChangesAsync();
         return NoContent();
     }
 }

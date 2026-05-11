@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 interface TaskInputProps {
-  // Function passed from parent to add a new task
   onAddTask: (task: string) => void;
 }
 

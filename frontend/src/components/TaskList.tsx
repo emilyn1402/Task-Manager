@@ -52,13 +52,15 @@ const TaskList: React.FC<TaskListProps> = ({
               onChange={() => handleTaskClick(task.id)}
             />
             <label
-              className="form-check-label"
+              className="form-check-label text-start"
               htmlFor={`checkbox-${task.id}`}
               style={{
                 textDecoration: task.completed ? "line-through" : "none",
                 cursor: "pointer",
                 userSelect: "none",
                 flex: 1,
+                marginLeft: "10px",
+                fontSize: "1.2em",
               }}
             >
               {task.title}

@@ -29,6 +29,7 @@ function App() {
         completed: false,
       })
       .then((res) => setTasks([...tasks, res.data])); // Append new task to list
+    console.log(`Added task: ${title}`); // Log the added task title
   };
 
   // Function to delete a task
@@ -36,6 +37,7 @@ function App() {
     axios
       .delete(`http://localhost:5017/api/tasks/${id}`)
       .then(() => setTasks(tasks.filter((t) => t.id !== id))); // Remove task from list
+    console.log(`Deleted task with id: ${id}`); // Log the deleted task ID
   };
 
   // Function to handle update of task completion status
